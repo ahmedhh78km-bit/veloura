@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth bg-black text-white">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veloura | Luxury Dining Redefined</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#0D0D0C',
+            charcoal: '#1A1917',
+            gold: {
+              400: '#E5C158',
+              500: '#D4AF37',
+              600: '#AA7C11',
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"Outfit"', 'sans-serif'],
+          },
+          boxShadow: {
+            'premium': '0 10px 30px -10px rgba(212, 175, 55, 0.15)',
+            'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .glassmorphism {
+        @apply bg-zinc-950/40 backdrop-blur-xl border border-white/5;
+      }
+    }
+  </style>
+</head>
+
+<body class="font-sans antialiased bg-obsidian text-zinc-300 min-h-screen flex flex-col">
+
+  <!-- Header Section -->
+  <header class="fixed top-0 left-0 z-40 w-full bg-transparent">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-2">
+        <span class="font-serif text-2xl tracking-widest text-gold-500 font-bold">
+          Veloura
+        </span>
+      </a>
+
+      <!-- Desktop Nav -->
+
+      <nav class="hidden md:flex items-center gap-10 text-sm font-medium tracking-wide">
+
+        <a href="index.html" class="text-zinc-300 hover:text-gold-400 transition-colors duration-300 pb-1">
+
+          HOME
+
+        </a>
+
+        <a href="menu.html" class="text-white hover:text-gold-400 border-b-2 border-gold-500 pb-1">
+
+          MENU
+
+        </a>
+
+        <a href="checkout.html" class="text-zinc-300 hover:text-gold-400 transition-colors duration-300 pb-1">
+
+          CHECKOUT
+
+        </a>
+
+        <a href="admin.html" class="text-zinc-300 hover:text-gold-400 transition-colors duration-300 pb-1">
+
+          ADMIN
+
+        </a>
+
+      </nav>
+
+      <!-- Right Side -->
+      <div class="flex items-center gap-4">
+
+        <!-- Cart -->
+        <button id="cart-toggle-btn"
+          class="relative p-2.5 rounded-full border border-zinc-700/50 bg-transparent hover:bg-zinc-800/40 transition-all focus:outline-none">
+
+          <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+
+          <span
+            class="cart-badge absolute -top-1 -right-1 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold text-xs w-5 h-5 flex items-center justify-center rounded-full shadow-md hidden">
+            0
+          </span>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="mobile-menu-toggle"
+          class="md:hidden p-2 rounded-lg text-zinc-300 hover:text-white focus:outline-none">
+
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full z-30 px-4 py-4">
+
+      <div class="glassmorphism rounded-2xl border border-white/10 overflow-hidden shadow-2xl backdrop-blur-xl">
+
+        <div class="flex flex-col p-2">
+
+          <!-- Home -->
+          <a href="index.html"
+            class="px-4 py-3 rounded-xl text-sm font-medium text-zinc-300 hover:bg-white/5 hover:text-gold-400 transition-all duration-300">
+            HOME
+          </a>
+
+          <!-- Menu -->
+          <a href="menu.html" class="           px-4 py-3 rounded-xl text-sm font-semibold bg-gold-500/10 text-gold-400 border border-gold-500/20
+">
+            MENU
+          </a>
+
+          <!-- Checkout (active page) -->
+          <a href="checkout.html"
+            class="px-4 py-3 rounded-xl text-sm font-medium text-zinc-300 hover:bg-white/5 hover:text-gold-400 transition-all duration-300">
+            CHECKOUT
+          </a>
+
+          <!-- Admin -->
+          <a href="admin.html"
+            class="px-4 py-3 rounded-xl text-sm font-medium text-zinc-300 hover:bg-white/5 hover:text-gold-400 transition-all duration-300">
+            ADMIN
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Page Banner -->
+  <section class="relative pt-36 pb-16 overflow-hidden">
+
+    <!-- Glow -->
+
+    <div class="absolute inset-0">
+
+      <div class="absolute
+      left-1/2
+      top-0
+      -translate-x-1/2
+      w-[700px]
+      h-[300px]
+      bg-gold-500/5
+      blur-[140px]">
+      </div>
+
+    </div>
+
+    <div class="relative z-10
+    max-w-7xl
+    mx-auto
+    px-6">
+
+      <div class="flex
+      flex-col
+      lg:flex-row
+      justify-between
+      items-center
+      gap-10">
+
+        <!-- Left -->
+
+        <div class="text-center
+        lg:text-left">
+
+          <span class="uppercase
+          tracking-[0.35em]
+          text-gold-500
+          text-xs">
+
+            Curated Selection
+
+          </span>
+
+          <h1 class="mt-5
+          font-serif
+          text-5xl
+          md:text-6xl
+          text-white">
+
+            Chef's Menu
+
+          </h1>
+
+          <p class="mt-5
+          text-zinc-500
+          max-w-xl
+          leading-8">
+
+            Explore handcrafted dishes,
+            signature creations,
+            and exceptional flavors.
+
+          </p>
+
+        </div>
+
+        <!-- Search -->
+
+        <div class="w-full
+        lg:w-[360px]">
+
+          <div class="relative">
+
+            <svg class="absolute
+            left-5
+            top-1/2
+            -translate-y-1/2
+            w-5
+            h-5
+            text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-5-5m2-5a7 7 0 11-14 0a7 7 0 0114 0z" />
+
+            </svg>
+
+            <input id="menu-search" type="text" placeholder="Search dishes..." class="w-full
+            h-16
+            pl-14
+            pr-5
+            rounded-2xl
+            bg-zinc-950/80
+            backdrop-blur-xl
+            border
+            border-white/5
+            text-white
+            placeholder-zinc-500
+            focus:border-gold-500/30
+            focus:outline-none
+            transition">
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Category & Filter Bar -->
+  <section class="relative py-6 z-10">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="rounded-3xl
+      border border-white/5
+      bg-zinc-950/70
+      backdrop-blur-xl
+      p-5">
+
+        <div class="flex
+        flex-col
+        lg:flex-row
+        items-center
+        justify-between
+        gap-5">
+
+          <!-- Categories -->
+
+          <div id="category-tabs" class="
+          flex
+          gap-3
+          w-full
+          lg:w-auto
+          overflow-x-auto
+          pb-1">
+
+            <button data-category="all" class="
+            category-btn
+            shrink-0
+            px-6
+            py-3
+            rounded-full
+            bg-gradient-to-r
+            from-gold-500
+            to-gold-600
+            text-black
+            font-semibold">
+
+              All
+
+            </button>
+
+            <button data-category="appetizers" class="
+            category-btn
+            shrink-0
+            px-6
+            py-3
+            rounded-full
+            bg-white/5
+            text-zinc-400
+            hover:bg-white/10
+            hover:text-white
+            transition">
+
+              Appetizers
+
+            </button>
+
+            <button data-category="mains" class="
+            category-btn
+            shrink-0
+            px-6
+            py-3
+            rounded-full
+            bg-white/5
+            text-zinc-400
+            hover:bg-white/10
+            hover:text-white
+            transition">
+
+              Mains
+
+            </button>
+
+            <button data-category="desserts" class="
+            category-btn
+            shrink-0
+            px-6
+            py-3
+            rounded-full
+            bg-white/5
+            text-zinc-400
+            hover:bg-white/10
+            hover:text-white
+            transition">
+
+              Desserts
+
+            </button>
+
+            <button data-category="beverages" class="
+            category-btn
+            shrink-0
+            px-6
+            py-3
+            rounded-full
+            bg-white/5
+            text-zinc-400
+            hover:bg-white/10
+            hover:text-white
+            transition">
+
+              Beverages
+
+            </button>
+
+          </div>
+
+          <!-- Filters -->
+
+          <div class="
+          flex
+          flex-wrap
+          items-center
+          gap-3">
+
+            <label class="cursor-pointer">
+
+              <input type="checkbox" id="filter-vegetarian" class="peer hidden">
+
+              <div class="
+              px-5
+              py-3
+              rounded-full
+              border
+              border-white/5
+              text-zinc-400
+              hover:text-white
+              hover:border-gold-500/20
+              peer-checked:bg-gold-500
+              peer-checked:text-black
+              transition">
+
+                🥗 Vegetarian
+
+              </div>
+
+            </label>
+
+            <label class="cursor-pointer">
+
+              <input type="checkbox" id="filter-gluten-free" class="peer hidden">
+
+              <div class="
+              px-5
+              py-3
+              rounded-full
+              border
+              border-white/5
+              text-zinc-400
+              hover:text-white
+              hover:border-gold-500/20
+              peer-checked:bg-gold-500
+              peer-checked:text-black
+              transition">
+
+                🌾 Gluten Free
+
+              </div>
+
+            </label>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Menu Dishes Grid -->
+  <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+    <!-- Loading Spinner -->
+    <div id="menu-loading" class="flex flex-col items-center justify-center py-24 text-zinc-500">
+      <svg class="animate-spin h-8 w-8 text-gold-500 mb-4" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+        </path>
+      </svg>
+      <p class="font-medium text-sm">Curating Gastronomy...</p>
+    </div>
+
+    <!-- Empty Results -->
+    <div id="menu-empty" class="hidden flex-col items-center justify-center py-24 text-zinc-500 text-center">
+      <svg class="w-16 h-16 stroke-1 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <p class="font-medium text-lg text-zinc-400">No dishes match your filters</p>
+      <p class="text-xs text-zinc-600 mt-1">Try resetting search keywords or category selections</p>
+    </div>
+
+    <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden">
+      <!-- Rendered dynamically by js/menu.js -->
+    </div>
+  </main>
+
+  <!-- Detail & Customization Modal Overlay -->
+  <div id="detail-modal-overlay"
+    class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-all duration-300 hidden opacity-0">
+    <div id="detail-modal-card"
+      class="bg-charcoal/95 border border-white/10 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-glass transform scale-95 transition-all duration-300 flex flex-col">
+      <!-- Modal Header Image -->
+      <div class="relative h-64 md:h-80 flex-shrink-0">
+        <img id="modal-image" src="" alt="" class="w-full h-full object-cover">
+        <button id="modal-close-btn"
+          class="absolute top-4 right-4 p-2.5 bg-obsidian/70 backdrop-blur-md hover:bg-zinc-800 text-zinc-300 hover:text-white rounded-full border border-white/10 focus:outline-none transition-colors">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 md:p-8 space-y-6 flex-1">
+        <div class="flex justify-between items-start gap-4">
+          <div>
+            <h2 id="modal-title" class="font-serif text-2xl md:text-3xl text-zinc-100 font-bold"></h2>
+            <div id="modal-tags" class="flex flex-wrap gap-1.5 mt-2">
+              <!-- Dynamically populated tags -->
+            </div>
+          </div>
+          <span id="modal-base-price" class="font-serif text-2xl text-gold-500 font-bold"></span>
+        </div>
+
+        <p id="modal-description" class="text-zinc-400 text-sm md:text-base font-light leading-relaxed"></p>
+
+        <!-- Customizations Form -->
+        <form id="modal-customization-form" class="space-y-6 border-t border-zinc-800/60 pt-6">
+          <!-- Dynamically populated options -->
+        </form>
+
+        <div id="modal-allergens-section" class="text-xs text-zinc-500 flex items-center gap-1">
+          <span class="font-semibold text-zinc-400">Allergen Info:</span>
+          <span id="modal-allergens">None</span>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-6 border-t border-zinc-800/80 bg-obsidian/60 flex items-center justify-between gap-6 flex-shrink-0">
+        <!-- Quantity Selector -->
+        <div class="flex items-center gap-3 border border-zinc-700 rounded-xl p-1.5 bg-zinc-900/60">
+          <button type="button" id="modal-qty-minus"
+            class="w-8 h-8 flex items-center justify-center text-zinc-400 hover:text-zinc-100 font-bold rounded-lg hover:bg-zinc-800/40">-</button>
+          <span id="modal-qty-value" class="text-sm font-semibold text-zinc-200 w-6 text-center">1</span>
+          <button type="button" id="modal-qty-plus"
+            class="w-8 h-8 flex items-center justify-center text-zinc-400 hover:text-zinc-100 font-bold rounded-lg hover:bg-zinc-800/40">+</button>
+        </div>
+
+        <button type="button" id="modal-add-to-cart-btn"
+          class="flex-1 py-4 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-obsidian font-bold rounded-xl shadow-premium hover:shadow-gold-500/20 transform hover:-translate-y-0.5 transition-all duration-300 tracking-wide text-center">
+          ADD TO ORDER - <span id="modal-total-price"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="mt-auto border-t border-zinc-900 bg-obsidian py-12">
+    <div
+      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-6">
+      <div class="flex flex-col gap-2">
+        <span class="font-serif text-lg tracking-widest text-gold-500 font-bold">L'AMBROISIE</span>
+        <p class="text-xs text-zinc-500">© 2026 L'Ambroisie Restaurant Group. All rights reserved.</p>
+      </div>
+      <div class="flex gap-8 text-xs font-semibold tracking-wider text-zinc-500">
+        <a href="menu.html" class="hover:text-gold-400 transition-colors">MENU</a>
+        <a href="checkout.html" class="hover:text-gold-400 transition-colors">CHECKOUT</a>
+        <a href="admin.html" class="hover:text-gold-400 transition-colors">ADMIN PORTAL</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Slide-out Cart Drawer -->
+  <div id="cart-overlay"
+    class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 transition-opacity duration-300 hidden opacity-0"></div>
+  <div id="cart-drawer"
+    class="fixed top-0 right-0 bottom-0 z-50 w-full max-w-md bg-charcoal/95 border-l border-white/10 shadow-glass transform translate-x-full transition-transform duration-300 flex flex-col">
+    <!-- Header -->
+    <div class="p-6 border-b border-zinc-800/80 flex items-center justify-between">
+      <h3 class="font-serif text-xl font-bold text-zinc-100 flex items-center gap-2">
+        <svg class="w-5 h-5 text-gold-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+        </svg>
+        Your Order
+      </h3>
+      <button id="cart-close-btn"
+        class="p-2 text-zinc-400 hover:text-white rounded-full hover:bg-zinc-800 transition-colors focus:outline-none">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Items container -->
+    <div id="cart-items-container" class="flex-1 overflow-y-auto px-6 py-4 divide-y divide-zinc-800/40">
+      <!-- Rendered dynamically by cart.js -->
+    </div>
+
+    <!-- Summary -->
+    <div id="cart-summary-container" class="p-6 border-t border-zinc-800/80 bg-obsidian/60 hidden space-y-4">
+      <div class="space-y-2 text-sm text-zinc-400">
+        <div class="flex justify-between">
+          <span>Subtotal</span>
+          <span id="cart-subtotal" class="text-zinc-200">$0.00</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Tax (10%)</span>
+          <span id="cart-tax" class="text-zinc-200">$0.00</span>
+        </div>
+        <div class="flex justify-between border-t border-zinc-800/60 pt-2 text-base font-bold text-zinc-100">
+          <span>Total</span>
+          <span id="cart-total" class="text-gold-500">$0.00</span>
+        </div>
+      </div>
+      <a href="checkout.html"
+        class="block w-full text-center py-4 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-obsidian font-bold rounded-xl shadow-premium hover:shadow-gold-500/20 transform hover:-translate-y-0.5 transition-all duration-300 tracking-wide">
+        PROCEED TO CHECKOUT
+      </a>
+    </div>
+  </div>
+
+  <!-- Mobile Toggle Script -->
+  <script>
+    const mobileBtn = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileBtn && mobileMenu) {
+      mobileBtn.onclick = () => {
+        mobileMenu.classList.toggle('hidden');
+      }
+    }
+  </script>
+
+  <!-- Application Logic -->
+  <script type="module" src="js/utils.js"></script>
+  <script type="module" src="js/cart.js"></script>
+  <script type="module" src="js/menu.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth bg-black text-white">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veloura | Luxury Dining</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#0D0D0C',
+            charcoal: '#1A1917',
+            gold: {
+              400: '#E5C158',
+              500: '#D4AF37',
+              600: '#AA7C11',
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"Outfit"', 'sans-serif'],
+          },
+          boxShadow: {
+            'premium': '0 10px 30px -10px rgba(212, 175, 55, 0.15)',
+            'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .glassmorphism {
+        @apply bg-zinc-950/40 backdrop-blur-xl border border-white/5;
+      }
+    }
+  </style>
+</head>
+
+<body class="font-sans antialiased bg-obsidian text-zinc-300 min-h-screen flex flex-col">
+
+  <!-- Premium Header -->
+  <header class="sticky top-0 z-50 w-full bg-black/30 backdrop-blur-2xl border-b border-white/5 shadow-lg">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-3 group">
+
+        <div class="flex flex-col">
+
+          <span
+            class="font-serif text-2xl md:text-3xl font-bold tracking-[5px] text-gold-500 transition-all duration-300 group-hover:text-gold-400">
+
+            VELOURA
+
+          </span>
+
+          <span class="text-[10px] tracking-[3px] text-zinc-500 uppercase">
+
+            Luxury Dining Experience
+
+          </span>
+
+        </div>
+
+        <!-- Admin Badge -->
+        <span
+          class="px-3 py-1 rounded-full text-[10px] font-bold tracking-[2px] uppercase bg-gold-500/10 border border-gold-500/20 text-gold-400 shadow-sm shadow-gold-500/10">
+
+          ADMIN
+
+        </span>
+
+      </a>
+
+      <!-- Right Side -->
+      <div class="flex items-center gap-3">
+
+        <button id="admin-logout-btn"
+          class="hidden px-5 py-2.5 rounded-xl bg-zinc-900/60 border border-zinc-800 text-zinc-400 text-xs font-semibold uppercase tracking-[2px] transition-all duration-300 hover:text-white hover:border-gold-500/30 hover:bg-zinc-800 hover:shadow-lg hover:shadow-gold-500/10 active:scale-95">
+
+          <span class="flex items-center gap-2">
+
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h5a2 2 0 012 2v1" />
+
+            </svg>
+
+            Log Out
+
+          </span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+  <!-- Premium Login Overlay -->
+  <div id="login-overlay" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 flex items-center justify-center p-5">
+
+    <div
+      class="w-full max-w-6xl rounded-[32px] overflow-hidden border border-white/10 bg-charcoal/95 shadow-2xl grid md:grid-cols-2">
+
+      <!-- Left Showcase Section -->
+      <div class="hidden md:flex relative min-h-[650px] overflow-hidden">
+
+        <!-- Background Image -->
+        <img
+          src="https://images.unsplash.com/photo-1580199882547-8fa7a46d732c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHx8"
+          class="absolute inset-0 w-full h-full object-cover brightness-90" />
+
+        <!-- Lighter Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-black/60">
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 flex flex-col justify-between p-10 h-full">
+
+          <div>
+
+            <span class="font-serif text-4xl tracking-[8px] text-gold-500 font-bold">
+
+              VELOURA
+
+            </span>
+
+            <p class="text-zinc-100 mt-4 text-sm leading-7 max-w-sm">
+
+              Luxury Dining Experience crafted for unforgettable moments and premium hospitality.
+
+            </p>
+
+          </div>
+
+          <!-- Bottom Security Box -->
+
+          <div class="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-5">
+
+            <div class="flex items-center gap-4">
+
+              <div
+                class="w-12 h-12 rounded-xl bg-gold-500/10 flex items-center justify-center border border-gold-500/20">
+
+                <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2V9a2 2 0 00-.59-1.41l-5-5A2 2 0 0013 3H6a2 2 0 00-2 2v14a2 2 0 002 2z" />
+
+                </svg>
+
+              </div>
+
+              <div>
+
+                <h4 class="font-semibold text-white">
+
+                  Secure Access
+
+                </h4>
+
+                <p class="text-xs text-zinc-500">
+
+                  Authorized personnel only
+
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Right Login Form -->
+      <div class="p-8 md:p-12 flex items-center">
+
+        <div class="w-full">
+
+          <div class="text-center mb-10">
+
+            <div
+              class="w-16 h-16 mx-auto rounded-full bg-gold-500/10 border border-gold-500/20 flex items-center justify-center">
+
+              <svg class="w-8 h-8 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 15v2m6-6V9a6 6 0 10-12 0v2m-2 0h16v8H4z" />
+
+              </svg>
+
+            </div>
+
+            <h2 class="font-serif text-4xl text-white font-bold mt-6">
+
+              Admin Login
+
+            </h2>
+
+            <p class="text-sm text-zinc-500 mt-2">
+
+              Access the administrator dashboard
+
+            </p>
+
+          </div>
+
+          <form id="login-form" class="space-y-5">
+
+            <div>
+
+              <label class="block text-xs uppercase tracking-[2px] text-gold-400 mb-2">
+
+                Admin Username
+
+              </label>
+
+              <input type="text" id="loginUsername" required placeholder="admin"
+                class="w-full px-5 py-4 bg-zinc-900 border border-zinc-800 rounded-2xl text-white placeholder-zinc-600 focus:outline-none focus:border-gold-500/50 transition">
+
+            </div>
+
+            <div>
+
+              <label class="block text-xs uppercase tracking-[2px] text-gold-400 mb-2">
+
+                Password
+
+              </label>
+
+              <input type="password" id="loginPassword" required placeholder="••••••••"
+                class="w-full px-5 py-4 bg-zinc-900 border border-zinc-800 rounded-2xl text-white placeholder-zinc-600 focus:outline-none focus:border-gold-500/50 transition">
+
+            </div>
+
+            <button type="submit"
+              class="w-full py-4 rounded-2xl bg-gradient-to-r from-gold-500 to-gold-600 text-obsidian font-bold uppercase tracking-[2px] hover:brightness-110 transition-all active:scale-95">
+
+              Access Console
+
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= ADMIN DASHBOARD ================= -->
+  <main id="admin-main" class="hidden flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full space-y-10">
+
+    <!-- Welcome Banner -->
+    <section class="glassmorphism rounded-3xl overflow-hidden border border-white/5 relative p-8">
+
+      <div class="absolute inset-0 opacity-20">
+        <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=1200"
+          class="w-full h-full object-cover">
+      </div>
+
+      <div class="relative z-10">
+
+        <p class="uppercase tracking-[4px] text-xs text-gold-400 font-semibold">
+          Veloura Management Console
+        </p>
+
+        <h1 class="font-serif text-4xl text-white font-bold mt-2">
+          Dashboard Overview
+        </h1>
+
+        <p class="text-zinc-400 mt-3 max-w-xl">
+          Monitor restaurant performance, manage orders and update inventory in real time.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- KPI Cards -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+
+      <!-- Revenue -->
+      <div class="group glassmorphism rounded-3xl p-6 border border-white/5 hover:border-emerald-500/30 transition-all">
+
+        <div class="flex justify-between items-start">
+
+          <div>
+
+            <p class="text-xs uppercase tracking-widest text-zinc-500">
+              Revenue
+            </p>
+
+            <h3 id="stat-revenue" class="text-3xl font-bold text-white font-serif mt-2">
+              $0.00
+            </h3>
+
+            <p class="text-xs text-emerald-400 mt-3">
+              +12% this month
+            </p>
+
+          </div>
+
+          <div
+            class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+
+            💰
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Active Orders -->
+
+      <div class="group glassmorphism rounded-3xl p-6 border border-white/5 hover:border-gold-500/30 transition-all">
+
+        <div class="flex justify-between items-start">
+
+          <div>
+
+            <p class="text-xs uppercase tracking-widest text-zinc-500">
+              Active Orders
+            </p>
+
+            <h3 id="stat-active" class="text-3xl font-bold text-white font-serif mt-2">
+              0
+            </h3>
+
+            <p class="text-xs text-gold-400 mt-3">
+              Live queue
+            </p>
+
+          </div>
+
+          <div class="w-14 h-14 rounded-2xl bg-gold-500/10 border border-gold-500/20 flex items-center justify-center">
+
+            📦
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Average Order -->
+
+      <div class="group glassmorphism rounded-3xl p-6 border border-white/5 hover:border-sky-500/30 transition-all">
+
+        <div class="flex justify-between items-start">
+
+          <div>
+
+            <p class="text-xs uppercase tracking-widest text-zinc-500">
+              Average Order
+            </p>
+
+            <h3 id="stat-aov" class="text-3xl font-bold text-white font-serif mt-2">
+              $0.00
+            </h3>
+
+            <p class="text-xs text-sky-400 mt-3">
+              Customer spending
+            </p>
+
+          </div>
+
+          <div class="w-14 h-14 rounded-2xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center">
+
+            📊
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Best Seller -->
+
+      <div class="group glassmorphism rounded-3xl p-6 border border-white/5 hover:border-purple-500/30 transition-all">
+
+        <p class="text-xs uppercase tracking-widest text-zinc-500">
+          Best Seller
+        </p>
+
+        <div id="stat-popular" class="text-xl text-white font-semibold mt-4">
+          No orders yet
+        </div>
+
+        <p class="text-xs text-purple-400 mt-3">
+          Most ordered item
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- Active Orders -->
+    <section class="glassmorphism rounded-3xl p-8 border border-white/5">
+
+      <div class="flex justify-between items-center mb-8">
+
+        <div>
+
+          <h2 class="font-serif text-3xl text-white">
+            Live Orders
+          </h2>
+
+          <p class="text-sm text-zinc-500 mt-1">
+            Real-time customer order tracking
+          </p>
+
+        </div>
+
+        <button id="btn-refresh-orders"
+          class="w-11 h-11 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 transition flex items-center justify-center">
+
+          ↻
+
+        </button>
+
+      </div>
+
+
+      <div class="overflow-auto">
+
+        <table class="w-full">
+
+          <thead>
+
+            <tr class="border-b border-zinc-800 text-zinc-500 uppercase text-xs">
+
+              <th class="py-4">Order</th>
+              <th>Customer</th>
+              <th>Items</th>
+              <th>Total</th>
+              <th>Status</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody id="orders-tbody" class="divide-y divide-zinc-800">
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- Inventory -->
+    <section class="glassmorphism rounded-3xl p-6 md:p-8 border border-white/5">
+
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5 mb-8">
+
+        <!-- Title -->
+        <div class="space-y-2">
+
+          <div class="flex items-center gap-3">
+
+            <div
+              class="w-10 h-10 rounded-xl bg-gold-500/10 border border-gold-500/20 flex items-center justify-center text-gold-400">
+
+              📦
+
+            </div>
+
+            <h2 class="font-serif text-2xl md:text-3xl font-bold text-white">
+              Inventory Manager
+            </h2>
+
+          </div>
+
+          <p class="text-xs md:text-sm text-zinc-500 pl-13">
+            Manage menu items, pricing and stock availability
+          </p>
+
+        </div>
+
+        <!-- Add Button -->
+        <button id="btn-open-add-menu-modal"
+          class="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-gradient-to-r from-gold-500 to-gold-600 text-obsidian font-bold text-sm tracking-wider transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-gold-500/20 active:scale-95">
+
+          + ADD NEW DISH
+
+        </button>
+
+      </div>
+
+
+      <div class="overflow-auto">
+
+        <table class="w-full">
+
+          <thead>
+
+            <tr class="border-b border-zinc-800 text-zinc-500 uppercase text-xs">
+
+              <th class="py-4">Dish</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Status</th>
+              <th class="text-right">Actions</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody id="inventory-tbody" class="divide-y divide-zinc-800">
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Modal: Add New Menu Item -->
+  <div id="add-menu-modal-overlay"
+    class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-all duration-300 hidden opacity-0">
+    <div
+      class="bg-charcoal/95 border border-white/10 rounded-2xl w-full max-w-xl shadow-glass flex flex-col p-6 md:p-8 space-y-6">
+      <div class="flex justify-between items-center">
+        <h3 class="font-serif text-xl font-bold text-zinc-100">Add New Menu Dish</h3>
+        <button id="add-menu-modal-close"
+          class="p-1.5 text-zinc-400 hover:text-white rounded-full hover:bg-zinc-850 transition-colors focus:outline-none">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <form id="add-menu-form" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="md:col-span-2">
+            <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-1.5">Dish Name</label>
+            <input type="text" id="menuName" required placeholder="Truffle Carpaccio"
+              class="w-full px-4 py-2.5 bg-zinc-900 border border-zinc-800 rounded-xl text-zinc-200 placeholder-zinc-700 text-sm focus:outline-none focus:border-gold-500/50">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-1.5">Category</label>
+            <select id="menuCategory" required
+              class="w-full px-4 py-2.5 bg-zinc-900 border border-zinc-800 rounded-xl text-zinc-200 text-sm focus:outline-none focus:border-gold-500/50">
+              <option value="appetizers">Appetizers</option>
+              <option value="mains">Mains</option>
+              <option value="desserts">Desserts</option>
+              <option value="beverages">Beverages</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-1.5">Base Price
+              ($)</label>
+            <input type="number" step="0.01" min="0" id="menuPrice" required placeholder="24.00"
+              class="w-full px-4 py-2.5 bg-zinc-900 border border-zinc-800 rounded-xl text-zinc-200 placeholder-zinc-700 text-sm focus:outline-none focus:border-gold-500/50">
+          </div>
+          <div class="md:col-span-2">
+            <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-1.5">Image URL</label>
+            <input type="url" id="menuImage" required
+              placeholder="https://images.unsplash.com/... (standard cover link)"
+              class="w-full px-4 py-2.5 bg-zinc-900 border border-zinc-800 rounded-xl text-zinc-200 placeholder-zinc-700 text-sm focus:outline-none focus:border-gold-500/50">
+          </div>
+          <div class="md:col-span-2">
+            <label
+              class="block text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-1.5">Description</label>
+            <textarea id="menuDescription" required rows="3"
+              placeholder="Describe the item preparation, key herbs, flavors, and visual arrangement..."
+              class="w-full px-4 py-2.5 bg-zinc-900 border border-zinc-800 rounded-xl text-zinc-200 placeholder-zinc-700 text-sm focus:outline-none focus:border-gold-500/50"></textarea>
+          </div>
+        </div>
+
+        <button type="submit"
+          class="w-full py-3.5 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-obsidian font-bold rounded-xl transition-all duration-300 tracking-wider uppercase text-xs">
+          PUBLISH DISH TO MENU
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="mt-auto border-t border-zinc-900 bg-obsidian py-12">
+    <div
+      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-6">
+      <div class="flex flex-col gap-2">
+        <span class="font-serif text-lg tracking-widest text-gold-500 font-bold">L'AMBROISIE</span>
+        <p class="text-xs text-zinc-500">© 2026 L'Ambroisie Restaurant Group. All rights reserved.</p>
+      </div>
+      <div class="flex gap-8 text-xs font-semibold tracking-wider text-zinc-500">
+        <a href="menu.html" class="hover:text-gold-400 transition-colors">MENU</a>
+        <a href="checkout.html" class="hover:text-gold-400 transition-colors">CHECKOUT</a>
+        <a href="admin.html" class="hover:text-gold-400 transition-colors">ADMIN PORTAL</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Logic -->
+  <script type="module" src="js/utils.js"></script>
+  <script type="module" src="js/admin.js"></script>
+</body>
+
+</html>

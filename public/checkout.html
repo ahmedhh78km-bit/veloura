@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr" class="scroll-smooth bg-black text-white">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veloura | Luxury Dining</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      content: ["./**/*.{html,js}"],
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#0D0D0C',
+            charcoal: '#1A1917',
+            gold: { 400: '#E5C158', 500: '#D4AF37', 600: '#AA7C11' }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"Outfit"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .glassmorphism {
+        @apply bg-zinc-950/40 backdrop-blur-xl border border-white/5;
+      }
+      .card-perspective { perspective: 1000px; }
+      .card-inner {
+        transform-style: preserve-3d;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .card-flip { transform: rotateY(180deg); }
+      .card-front, .card-back { backface-visibility: hidden; }
+      .card-back { transform: rotateY(180deg); }
+    }
+  </style>
+</head>
+
+<body class="font-sans antialiased bg-obsidian text-zinc-300 min-h-screen flex flex-col">
+
+  <!-- Header Section -->
+  <header class="fixed top-0 left-0 z-40 w-full bg-transparent">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-2">
+        <span class="font-serif text-2xl tracking-widest text-gold-500 font-bold">
+          Veloura
+        </span>
+      </a>
+
+      <!-- Desktop Nav -->
+
+      <nav class="hidden md:flex items-center gap-10 text-sm font-medium tracking-wide">
+
+        <a href="index.html" class="text-zinc-300 hover:text-gold-400 transition-colors duration-300 pb-1">
+
+          HOME
+
+        </a>
+
+        <a href="menu.html" class="text-zinc-300 hover:text-gold-400 transition-colors duration-300 pb-1">
+
+          MENU
+
+        </a>
+        <a href="checkout.html" class="text-white hover:text-gold-400 border-b-2 border-gold-500 pb-1">
+
+          CHECKOUT
+
+        </a>
+
+        <a href="admin.html" class="text-zinc-300 hover:text-gold-400 transition-colors duration-300 pb-1">
+
+          ADMIN
+
+        </a>
+
+      </nav>
+
+
+      <!-- Cart & Mobile Menu -->
+      <div class="flex items-center gap-3">
+
+        <!-- Cart -->
+        <button id="cart-toggle-btn"
+          class="relative p-2.5 rounded-full border border-zinc-800 bg-zinc-900/50 hover:bg-zinc-800 hover:border-zinc-700 transition-all duration-300 focus:outline-none">
+
+          <svg class="w-5 h-5 text-zinc-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+
+          </svg>
+
+          <span id="cart-badge"
+            class="absolute -top-1 -right-1 bg-gold-500 text-obsidian font-bold text-[10px] w-5 h-5 flex items-center justify-center rounded-full shadow-md hidden">
+
+            0
+
+          </span>
+
+        </button>
+
+        <!-- Hamburger -->
+        <button id="mobile-menu-toggle"
+          class="md:hidden p-2.5 rounded-full border border-zinc-800 bg-zinc-900/50 hover:bg-zinc-800 hover:border-zinc-700 text-zinc-300 hover:text-white transition-all duration-300 focus:outline-none">
+
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+
+          </svg>
+
+        </button>
+
+      </div>
+  </header>
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full z-30 px-4 py-4">
+
+    <div class="glassmorphism rounded-2xl border border-white/10 overflow-hidden shadow-2xl backdrop-blur-xl">
+
+      <div class="flex flex-col p-2">
+
+        <!-- Home -->
+        <a href="index.html"
+          class="px-4 py-3 rounded-xl text-sm font-medium text-zinc-300 hover:bg-white/5 hover:text-gold-400 transition-all duration-300">
+          HOME
+        </a>
+
+        <!-- Menu -->
+        <a href="menu.html"
+          class="px-4 py-3 rounded-xl text-sm font-medium text-zinc-300 hover:bg-white/5 hover:text-gold-400 transition-all duration-300">
+          MENU
+        </a>
+
+        <!-- Checkout (active page) -->
+        <a href="checkout.html"
+          class="px-4 py-3 rounded-xl text-sm font-semibold bg-gold-500/10 text-gold-400 border border-gold-500/20">
+          CHECKOUT
+        </a>
+
+        <!-- Admin -->
+        <a href="admin.html"
+          class="px-4 py-3 rounded-xl text-sm font-medium text-zinc-300 hover:bg-white/5 hover:text-gold-400 transition-all duration-300">
+          ADMIN
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12">
+    <!-- Checkout Form -->
+    <div id="checkout-form-container" class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-7 space-y-8">
+        <form id="checkout-form" novalidate class="space-y-8">
+
+          <!-- Step 1: Personal Details -->
+          <div class="glassmorphism p-6 md:p-8 rounded-3xl space-y-6">
+            <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+              <span
+                class="w-8 h-8 flex items-center justify-center rounded-2xl bg-gold-500/10 text-gold-400 text-lg font-bold">1</span>
+              Personal Details
+            </h3>
+
+            <!-- Order Type -->
+            <div class="grid grid-cols-2 gap-4">
+              <label class="cursor-pointer" id="label-delivery">
+                <input type="radio" name="orderType" value="delivery" checked class="hidden peer">
+                <div
+                  class="peer-checked:border-gold-500 peer-checked:bg-gold-500/10 border border-gold-500/30 rounded-3xl p-6 text-center transition-all hover:border-gold-500/50">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-11 h-11 mx-auto text-gold-400" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                  <p class="font-semibold mt-3 text-gold-300">Delivery</p>
+                  <p class="text-xs text-zinc-400 mt-0.5">$5.00</p>
+                </div>
+              </label>
+
+              <label class="cursor-pointer" id="label-pickup">
+                <input type="radio" name="orderType" value="pickup" class="hidden peer">
+                <div
+                  class="peer-checked:border-gold-500 peer-checked:bg-gold-500/10 border border-zinc-700 rounded-3xl p-6 text-center transition-all hover:border-zinc-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-11 h-11 mx-auto text-zinc-400" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2v-2a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2" />
+                  </svg>
+                  <p class="font-semibold mt-3">Pick-up</p>
+                  <p class="text-xs text-emerald-400 mt-0.5">Free</p>
+                </div>
+              </label>
+            </div>
+
+            <!-- Customer Info -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-xs uppercase tracking-widest text-zinc-400 mb-2">Full Name</label>
+                <input type="text" id="customerName" required
+                  class="w-full px-5 py-4 bg-zinc-900 border border-zinc-700 rounded-2xl focus:border-gold-500 outline-none">
+              </div>
+              <div>
+                <label class="block text-xs uppercase tracking-widest text-zinc-400 mb-2">Phone Number</label>
+                <input type="tel" id="customerPhone" required
+                  class="w-full px-5 py-4 bg-zinc-900 border border-zinc-700 rounded-2xl focus:border-gold-500 outline-none">
+              </div>
+              <div class="md:col-span-2">
+                <label class="block text-xs uppercase tracking-widest text-zinc-400 mb-2">Email Address</label>
+                <input type="email" id="customerEmail" required
+                  class="w-full px-5 py-4 bg-zinc-900 border border-zinc-700 rounded-2xl focus:border-gold-500 outline-none">
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Delivery Address -->
+          <div id="address-section" class="glassmorphism p-6 md:p-8 rounded-3xl space-y-6">
+            <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+              <span
+                class="w-8 h-8 flex items-center justify-center rounded-2xl bg-gold-500/10 text-gold-400 text-lg font-bold">2</span>
+              Delivery Address
+            </h3>
+            <div class="space-y-5">
+              <div>
+                <label class="block text-xs uppercase tracking-widest text-zinc-400 mb-2">Street Address</label>
+                <input type="text" id="deliveryStreet" required
+                  class="w-full px-5 py-4 bg-zinc-900 border border-zinc-700 rounded-2xl focus:border-gold-500 outline-none">
+              </div>
+              <div class="grid grid-cols-2 gap-5">
+                <div>
+                  <label class="block text-xs uppercase tracking-widest text-zinc-400 mb-2">City</label>
+                  <input type="text" id="deliveryCity" required
+                    class="w-full px-5 py-4 bg-zinc-900 border border-zinc-700 rounded-2xl focus:border-gold-500 outline-none">
+                </div>
+                <div>
+                  <label class="block text-xs uppercase tracking-widest text-zinc-400 mb-2">Postal Code</label>
+                  <input type="text" id="deliveryPostal" required
+                    class="w-full px-5 py-4 bg-zinc-900 border border-zinc-700 rounded-2xl focus:border-gold-500 outline-none">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: Payment -->
+          <div class="glassmorphism p-6 md:p-8 rounded-3xl space-y-8">
+            <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+              <span
+                class="w-8 h-8 flex items-center justify-center rounded-2xl bg-gold-500/10 text-gold-400 text-lg font-bold">3</span>
+              Payment Details
+            </h3>
+
+            <!-- Credit Card Visual -->
+            <div class="card-perspective max-w-sm mx-auto h-56">
+              <div id="visual-credit-card" class="card-inner relative h-full">
+                <!-- Front -->
+                <div
+                  class="card-front absolute inset-0 rounded-3xl bg-gradient-to-br from-zinc-900 to-amber-950 p-6 flex flex-col justify-between border border-white/10">
+                  <div class="flex justify-between">
+                    <span class="font-serif tracking-widest text-gold-400">Veloura</span>
+                    <div class="w-12 h-8 bg-gradient-to-r from-amber-400 to-yellow-300 rounded-md"></div>
+                  </div>
+                  <div id="card-num-mirror" class="font-mono text-xl tracking-widest text-white">•••• •••• •••• ••••
+                  </div>
+                  <div class="flex justify-between text-sm">
+                    <div>
+                      <div class="text-[10px] text-zinc-500">CARD HOLDER</div>
+                      <div id="card-name-mirror" class="uppercase">YOUR NAME</div>
+                    </div>
+                    <div>
+                      <div class="text-[10px] text-zinc-500">EXPIRES</div>
+                      <div id="card-expiry-mirror">MM/YY</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Back -->
+                <div
+                  class="card-back absolute inset-0 rounded-3xl bg-gradient-to-br from-zinc-900 to-amber-950 p-6 flex flex-col justify-center border border-white/10">
+                  <div class="w-full h-10 bg-black"></div>
+                  <div class="flex justify-end mt-6">
+                    <div class="text-right">
+                      <div class="text-xs text-zinc-500">CVV</div>
+                      <div id="card-cvv-mirror" class="bg-white text-black px-4 py-1 rounded font-mono">•••</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Inputs -->
+            <div class="grid grid-cols-1 gap-5">
+              <div>
+                <label class="block text-xs uppercase tracking-widest text-zinc-400 mb-2">Cardholder Name</label>
+                <input type="text" id="cardName" required
+                  class="w-full px-5 py-4 bg-zinc-900 border border-zinc-700 rounded-2xl focus:border-gold-500 outline-none uppercase">
+              </div>
+              <div>
+                <label class="block text-xs uppercase tracking-widest text-zinc-400 mb-2">Card Number</label>
+                <input type="text" id="cardNumber" maxlength="19" required
+                  class="w-full px-5 py-4 bg-zinc-900 border border-zinc-700 rounded-2xl focus:border-gold-500 outline-none font-mono">
+              </div>
+              <div class="grid grid-cols-2 gap-5">
+                <div>
+                  <label class="block text-xs uppercase tracking-widest text-zinc-400 mb-2">Expiry Date</label>
+                  <input type="text" id="cardExpiry" maxlength="5" required placeholder="MM/YY"
+                    class="w-full px-5 py-4 bg-zinc-900 border border-zinc-700 rounded-2xl focus:border-gold-500 outline-none font-mono">
+                </div>
+                <div>
+                  <label class="block text-xs uppercase tracking-widest text-zinc-400 mb-2">CVV</label>
+                  <input type="text" id="cardCVV" maxlength="3" required
+                    class="w-full px-5 py-4 bg-zinc-900 border border-zinc-700 rounded-2xl focus:border-gold-500 outline-none font-mono">
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs uppercase tracking-widest text-zinc-400 mb-2">Special Instructions</label>
+              <textarea id="orderNotes" rows="3"
+                class="w-full px-5 py-4 bg-zinc-900 border border-zinc-700 rounded-3xl focus:border-gold-500 outline-none"></textarea>
+            </div>
+          </div>
+
+          <button type="submit" id="submit-btn"
+            class="w-full py-5 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-obsidian font-bold text-lg rounded-3xl transition-all active:scale-95">
+            AUTHORIZE PAYMENT & PLACE ORDER
+          </button>
+        </form>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="lg:col-span-5">
+        <div class="glassmorphism p-6 md:p-8 rounded-3xl sticky top-28">
+          <h3 class="font-serif text-2xl font-bold mb-6">Order Summary</h3>
+          <div id="checkout-summary-list" class="max-h-80 overflow-auto space-y-4"></div>
+
+          <div class="pt-6 border-t border-zinc-700 space-y-3 text-sm">
+            <div class="flex justify-between"><span>Subtotal</span><span id="summary-subtotal">$0.00</span></div>
+            <div class="flex justify-between"><span>Tax (10%)</span><span id="summary-tax">$0.00</span></div>
+            <div class="flex justify-between" id="summary-delivery-row"><span>Delivery</span><span
+                id="summary-delivery">$5.00</span></div>
+            <div class="flex justify-between text-lg font-bold text-gold-400 pt-4 border-t border-zinc-700">
+              <span>Total</span>
+              <span id="summary-total">$0.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tracking Screen - Refined Compact Version -->
+    <div id="tracking-container"
+      class="hidden max-w-2xl mx-auto glassmorphism p-6 md:p-10 rounded-3xl text-center space-y-8">
+
+      <!-- Success Header -->
+      <div class="flex flex-col items-center">
+
+        <div class="relative">
+          <div
+            class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
+
+            <svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2.5"
+              viewBox="0 0 24 24">
+
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+
+          </div>
+
+          <div class="absolute inset-0 rounded-full border border-emerald-500/20 animate-pulse"></div>
+
+        </div>
+
+        <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mt-6">
+          Order Confirmed
+        </h2>
+
+        <p class="text-zinc-400 mt-2 text-sm max-w-sm">
+          Thank you for choosing Veloura. Your order is now being prepared.
+        </p>
+
+      </div>
+
+      <!-- Order Number -->
+      <div class="inline-flex flex-col items-center bg-zinc-900/60 border border-white/5 px-5 py-3 rounded-2xl">
+
+        <span class="text-[9px] uppercase tracking-[3px] text-zinc-500">
+          Order Number
+        </span>
+
+        <span id="tracking-order-number" class="font-mono text-lg text-gold-400 font-semibold mt-1">
+        </span>
+
+      </div>
+
+      <!-- Timeline -->
+      <div>
+
+        <h3 class="font-serif text-lg font-semibold text-zinc-100 mb-8">
+          Order Progress
+        </h3>
+
+        <div id="timeline-steps" class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+          <!-- Step 1 -->
+          <div class="timeline-step flex md:flex-col items-center gap-3" data-step="1">
+
+            <div
+              class="w-10 h-10 rounded-xl bg-zinc-900 border border-emerald-500 flex items-center justify-center text-sm font-semibold text-emerald-400 shadow-sm shadow-emerald-500/20">
+
+              1
+
+            </div>
+
+            <div class="text-left md:text-center">
+              <p class="font-medium text-sm text-white">
+                Placed
+              </p>
+
+              <p class="text-[11px] text-zinc-500">
+                Received
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Step 2 -->
+          <div class="timeline-step flex md:flex-col items-center gap-3" data-step="2">
+
+            <div
+              class="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-700 flex items-center justify-center text-sm font-semibold text-zinc-400">
+
+              2
+
+            </div>
+
+            <div class="text-left md:text-center">
+
+              <p class="font-medium text-sm">
+                Preparing
+              </p>
+
+              <p class="text-[11px] text-zinc-500">
+                Kitchen
+              </p>
+
+            </div>
+
+          </div>
+
+          <!-- Step 3 -->
+          <div class="timeline-step flex md:flex-col items-center gap-3" data-step="3">
+
+            <div
+              class="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-700 flex items-center justify-center text-sm font-semibold text-zinc-400">
+
+              3
+
+            </div>
+
+            <div class="text-left md:text-center">
+
+              <p id="step-3-title" class="font-medium text-sm">
+
+                Delivery
+
+              </p>
+
+              <p id="step-3-desc" class="text-[11px] text-zinc-500">
+
+                On the way
+
+              </p>
+
+            </div>
+
+          </div>
+
+          <!-- Step 4 -->
+          <div class="timeline-step flex md:flex-col items-center gap-3" data-step="4">
+
+            <div
+              class="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-700 flex items-center justify-center text-sm font-semibold text-zinc-400">
+
+              4
+
+            </div>
+
+            <div class="text-left md:text-center">
+
+              <p class="font-medium text-sm">
+                Delivered
+              </p>
+
+              <p class="text-[11px] text-zinc-500">
+                Enjoy
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex flex-col sm:flex-row gap-3 justify-center pt-4">
+
+        <a href="menu.html"
+          class="px-6 py-3 border border-zinc-700 text-sm hover:border-zinc-500 text-zinc-300 font-medium rounded-xl transition hover:bg-zinc-900">
+
+          ORDER AGAIN
+
+        </a>
+
+        <button onclick="window.location.reload()"
+          class="px-6 py-3 text-sm bg-gradient-to-r from-gold-500 to-gold-600 text-obsidian font-bold rounded-xl hover:brightness-110 transition">
+
+          REFRESH STATUS
+
+        </button>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==================== CART DRAWER ==================== -->
+  <div id="cart-overlay"
+    class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[999] hidden opacity-0 transition-opacity duration-300"></div>
+
+  <div id="cart-drawer"
+    class="fixed top-0 right-0 bottom-0 z-[1000] w-full max-w-md bg-charcoal border-l border-white/10 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+    <div class="p-6 border-b border-zinc-800 flex items-center justify-between">
+      <h3 class="font-serif text-2xl font-bold text-white">Your Cart</h3>
+      <button id="cart-close-btn" class="text-zinc-400 hover:text-white text-3xl leading-none">×</button>
+    </div>
+    <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-6"></div>
+    <div id="cart-summary-container" class="p-6 border-t border-zinc-800 bg-zinc-950">
+      <div class="space-y-3 mb-6">
+        <div class="flex justify-between text-sm text-zinc-400"><span>Subtotal</span><span
+            id="cart-subtotal">$0.00</span></div>
+        <div class="flex justify-between text-sm text-zinc-400"><span>Tax (10%)</span><span id="cart-tax">$0.00</span>
+        </div>
+        <div class="flex justify-between text-lg font-bold border-t border-zinc-700 pt-4">
+          <span>Total</span>
+          <span id="cart-total" class="text-gold-500">$0.00</span>
+        </div>
+      </div>
+      <a href="checkout.html"
+        class="block w-full py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-obsidian font-bold text-center rounded-2xl">PROCEED
+        TO CHECKOUT</a>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="js/utils.js"></script>
+  <script type="module" src="js/cart.js"></script>
+  <script type="module" src="js/checkout.js"></script>
+
+  <!-- Mobile Menu Toggle Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const mobileBtn = document.getElementById('mobile-menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuLinks = mobileMenu ? mobileMenu.querySelectorAll('a') : [];
+
+      const openIcon = `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>`;
+      const closeIcon = `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>`;
+
+      const toggleMenu = () => {
+        if (mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.remove('hidden');
+          mobileBtn.innerHTML = closeIcon;
+        } else {
+          mobileMenu.classList.add('hidden');
+          mobileBtn.innerHTML = openIcon;
+        }
+      };
+
+      if (mobileBtn && mobileMenu) {
+        mobileBtn.addEventListener('click', toggleMenu);
+      }
+
+      // Close menu when a navigation link is clicked
+      menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          mobileBtn.innerHTML = openIcon;
+        });
+      });
+
+      // Close on Escape key
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+          mobileBtn.innerHTML = openIcon;
+        }
+      });
+    });
+  </script>
+
+  <!-- Cart Toggle Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cartBtn = document.getElementById('cart-toggle-btn');
+      const cartDrawer = document.getElementById('cart-drawer');
+      const overlay = document.getElementById('cart-overlay');
+      const closeBtn = document.getElementById('cart-close-btn');
+
+      if (cartBtn && cartDrawer) {
+        const openCart = () => {
+          cartDrawer.classList.remove('translate-x-full');
+          overlay.classList.remove('hidden');
+          setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+          if (typeof window.loadCartItems === 'function') window.loadCartItems();
+        };
+
+        const closeCart = () => {
+          cartDrawer.classList.add('translate-x-full');
+          overlay.classList.add('opacity-0');
+          setTimeout(() => overlay.classList.add('hidden'), 300);
+        };
+
+        cartBtn.addEventListener('click', openCart);
+        closeBtn.addEventListener('click', closeCart);
+        overlay.addEventListener('click', closeCart);
+
+        document.addEventListener('keydown', e => { if (e.key === "Escape") closeCart(); });
+      }
+    });
+
+  </script>
+</body>
+
+</html>
