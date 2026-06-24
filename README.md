@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🍽️ VELOURA — Restaurant Ordering System
 
 <p align="center">
@@ -461,3 +462,6 @@ Ahmed
 
 This project currently has no license file.
 Add a LICENSE file before public release.
+=======
+# veloura
+>>>>>>> a7d5d8993e964d763b9da4f67304e293f4624935
