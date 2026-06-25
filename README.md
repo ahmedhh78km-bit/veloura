@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🍽️ VELOURA — Restaurant Ordering System
 
 <p align="center">
@@ -206,19 +205,15 @@ Example:
 
 ```env
 PORT=3000
-
 MONGODB_URI=your_mongodb_connection
-
 ADMIN_USERNAME=your_admin_username
-
 ADMIN_PASSWORD=your_admin_password
-
 JWT_SECRET=your_secret_key
 ```
 
 Important:
 
-If your password contains special characters like:
+If your password contains special characters:
 
 ```env
 #
@@ -231,7 +226,6 @@ Use quotes:
 
 ```env
 ADMIN_PASSWORD="Example#123"
-
 JWT_SECRET="Secret#Token123"
 ```
 
@@ -295,53 +289,6 @@ http://localhost:3000
 | GET    | /api/orders/stats      | Admin  |
 | GET    | /api/orders/:id        | Public |
 | PUT    | /api/orders/:id/status | Admin  |
-
----
-
-# Authentication Flow
-
-### Login
-
-Admin submits:
-
-```text
-Username
-Password
-```
-
-↓
-
-```text
-POST /api/auth/login
-```
-
-↓
-
-Server validates credentials
-
-↓
-
-JWT generated
-
-↓
-
-Token stored:
-
-```javascript
-localStorage.setItem("adminToken")
-```
-
-↓
-
-Protected routes send:
-
-```text
-Authorization: Bearer TOKEN
-```
-
-↓
-
-Middleware verifies token
 
 ---
 
@@ -438,15 +385,10 @@ Steps:
 
 ```bash
 Fork repository
-
 Create feature branch
-
 git checkout -b feature-name
-
 Commit changes
-
 git push
-
 Create Pull Request
 ```
 
@@ -462,6 +404,3 @@ Ahmed
 
 This project currently has no license file.
 Add a LICENSE file before public release.
-=======
-# veloura
->>>>>>> a7d5d8993e964d763b9da4f67304e293f4624935
